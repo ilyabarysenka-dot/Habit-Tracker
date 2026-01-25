@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -19,6 +20,13 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Habit Tracker"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+rootProject.name = "HabitTracker"
 include(":app")
- 
+include(":core:ui")
+include(":core:notification")
+include(":core:common")
+include(":data")
+include(":wiring")
+include(":feature:feature-one")
