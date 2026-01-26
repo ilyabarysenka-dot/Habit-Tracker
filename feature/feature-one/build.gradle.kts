@@ -10,13 +10,10 @@ android {
 }
 
 dependencies {
-    api(projects.core.common)
-    api(projects.core.ui)
+    implementation(projects.core.common)
+    implementation(projects.core.ui)
     implementation(projects.core.notification)
 
-    //Navigation
-    implementation(libs.navigation3.runtime)
-    implementation(libs.navigation3.ui)
     //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

@@ -2,7 +2,6 @@ import com.example.habittracker.alias
 import com.example.habittracker.androidTestImplementation
 import com.example.habittracker.applyAndroidLibraryConfig
 import com.example.habittracker.implementation
-import com.example.habittracker.ksp
 import com.example.habittracker.testImplementation
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin

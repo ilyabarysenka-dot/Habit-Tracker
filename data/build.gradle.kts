@@ -9,7 +9,18 @@ android {
 }
 
 dependencies {
-//Hilt
+    //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+
+    //Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
+    // Networking (Retrofit + OkHttp + JSON)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.gson)
 }

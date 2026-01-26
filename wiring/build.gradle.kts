@@ -11,6 +11,7 @@ android {
 dependencies {
     implementation(projects.data)
     implementation(projects.feature.featureOne)
+    implementation(projects.feature.featureTwo)
 
     //Hilt
     implementation(libs.hilt.android)

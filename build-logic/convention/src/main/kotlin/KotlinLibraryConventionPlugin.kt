@@ -16,5 +16,5 @@ class KotlinLibraryConventionPlugin: Plugin<Project> {
 
 private fun Project.applyPlugins(libs: LibrariesForLibs) = with(pluginManager) {
     apply(plugin = "java-library")
-    alias(libs.plugins.jetbrains.kotlin.jvm)
+    alias(libs.plugins.kotlin.jvm)
 }

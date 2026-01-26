@@ -17,8 +17,8 @@ androidxCoreSplashscreen = "1.2.0"
 navigation3 = "1.0.0"
 appcompat = "1.7.1"
 material = "1.13.0"
-jetbrainsKotlinJvm = "2.0.21"
 coroutines = "1.10.2"
+serializationCore = "1.7.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,6 +38,7 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines"}
+kotlinx-serialization-core = {module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref ="serializationCore"}
 
 androidx-room-runtime = {module = "androidx.room:room-runtime", version.ref = "room"}
 androidx-room-compiler = {module = "androidx.room:room-compiler", version.ref = "room"}
@@ -55,6 +56,7 @@ androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", versi
 
 navigation3-runtime = {module = "androidx.navigation3:navigation3-runtime", version.ref = "navigation3"}
 navigation3-ui = {module = "androidx.navigation3:navigation3-ui", version.ref = "navigation3"}
+navigation3-viewModel = {module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "navigation3"}
 
 # Dependencies of the included build-logic
 android-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -63,11 +65,12 @@ kotlin-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 # Plugins defined by this project
 habittracker-android-application = { id = "habittracker.android.application" }
