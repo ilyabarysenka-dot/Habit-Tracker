@@ -15,9 +15,12 @@ android {
 
 dependencies {
     //Modules
+    implementation(projects.feature.featureFirst.api)
+    implementation(projects.feature.featureFirst.impl)
+    implementation(projects.feature.featureSecond.api)
+    implementation(projects.feature.featureSecond.impl)
     implementation(projects.core.navigation)
     implementation(projects.core.ui)
-    implementation(projects.wiring)
 
     //Hilt
     implementation(libs.hilt.android)
