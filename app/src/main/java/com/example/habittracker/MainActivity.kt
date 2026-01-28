@@ -9,8 +9,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import com.example.core.navigation.EntryProviderInstaller
-import com.example.core.navigation.Navigator
+import com.example.habittracker.core.navigation.EntryProviderInstaller
+import com.example.habittracker.core.navigation.Navigator
 import com.example.habittracker.core.ui.theme.HabitTrackerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

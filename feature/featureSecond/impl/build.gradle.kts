@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.featureSecond.Impl"
+    namespace = "com.example.habittracker.feature.featureSecond.impl"
 }
 
 dependencies {

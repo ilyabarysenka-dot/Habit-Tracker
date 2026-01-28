@@ -6,16 +6,16 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.featureFirst.Impl"
+    namespace = "com.example.habittracker.feature.featureFirst.impl"
 }
 
 dependencies {
+    api(projects.core.navigation)
     implementation(projects.core.common)
     implementation(projects.core.ui)
     implementation(projects.core.notification)
     implementation(projects.feature.featureFirst.api)
     implementation(projects.feature.featureSecond.api)
-    api(projects.core.navigation)
 
     //Hilt
     implementation(libs.hilt.android)

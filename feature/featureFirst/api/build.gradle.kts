@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.featureFirst.api"
+    namespace = "com.example.habittracker.feature.featureFirst.api"
 }
 
 dependencies {

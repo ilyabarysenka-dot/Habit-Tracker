@@ -1,130 +1,194 @@
-### Habit Tracker — Android Project
+# Habit Tracker — Android Project
 
-This repository contains an Android project created to explore modern Android development in depth.
-The project focuses on architecture, modularization, and real-world features, rather than being a minimal demo.
+This repository contains an Android project created to explore modern Android development in depth.  
+The project focuses on architecture, modularization, and real-world features rather than being a minimal demo.
 
 The application is a habit tracker that demonstrates how to build a scalable Android app using:
 
-Jetpack Compose
-Multi-module architecture
-Dependency Injection
-Offline-first data handling
-Modern navigation patterns
+- Jetpack Compose
+- Multi-module architecture
+- Dependency Injection (Hilt)
+- Offline-first data handling
+- Feature-owned navigation
 
-🎯 Project goals
+---
 
-Practice building a real application from scratch
-Explore multi-module project structure
-Learn how features interact through clean boundaries
-Experiment with modern Android APIs and libraries
-Serve as a reference project for future Android development
+## 🎯 Project goals
 
-### 🧩 Modularization
+- Practice building a real application from scratch
+- Explore multi-module project structure
+- Learn how features interact through clean boundaries
+- Experiment with modern Android APIs and libraries
+- Serve as a reference project for future Android development
 
-[📄 Architecture PNG](docs/modulization.png)
+---
+
+## 🧩 Modularization
+
+[📄 Architecture diagram](docs/modulization.png)
+
+---
 
 ## 🧱 Core modules
-:core:common
 
-This module contains shared, platform-independent utilities used throughout the project.
-It acts as a foundation for the rest of the codebase and avoids any Android-specific APIs.
+### :core:common
 
-Typical content:
+Shared, platform-independent utilities used throughout the project.  
+This module avoids Android-specific APIs and acts as a foundation for the codebase.
 
-Result and error wrappers
-Logging abstractions
-String providers
-Common exceptions
-Coroutine helpers and utilities
+**Typical content:**
+- Result and error wrappers
+- Logging abstractions
+- String providers
+- Common exceptions
+- Coroutine helpers and utilities
+
 Because this module is pure Kotlin, it can be reused across different layers without introducing Android dependencies.
 
-## :core:ui
-This module represents the design system of the application.
-It centralizes all UI-related building blocks so that features remain visually consistent and easy to maintain.
+---
 
-Typical content:
-Application theme
-Color palettes and typography
-Reusable Compose UI components
-Common UI states and helpers
+### :core:ui
+
+Design system module that centralizes UI building blocks.
+
+**Typical content:**
+- Application theme
+- Color palettes and typography
+- Reusable Compose UI components
+- Common UI states and helpers
+
 Feature modules consume this module to build screens without duplicating UI logic.
 
-## :core:navigation
-This module contains navigation infrastructure shared across the app.
+---
 
-It provides:
+### :core:model
 
-Navigation 3 setup
-Type-safe route definitions
-Navigation abstractions and helpers
-Actual navigation destinations (screens) are implemented inside feature modules, while this module focuses on providing the tools needed to connect them.
+Defines core domain models shared across layers.
 
-## :core:network
-This module encapsulates network-related infrastructure.
+**Typical content:**
+- Entities
+- Value objects
+- Sealed models used across features and data
 
-Typical content:
+This module has no UI or framework dependencies.
 
-HTTP client setup (e.g. Retrofit / Ktor)
-API service definitions
-Network interceptors
-Serialization configuration
-Network error handling
-By isolating networking concerns, the rest of the app remains independent of specific networking implementations.
+---
 
-## :core:database
-This module contains local persistence infrastructure.
+### :core:navigation
 
-Typical content:
-Room database setup
-DAOs
-Database entities
-Migrations
+Provides navigation infrastructure, not destinations.
+
+**Key responsibilities:**
+- Abstract `Navigator`
+- Navigation back stack handling
+- Entry provider mechanism for feature-owned navigation
+
+Features contribute navigation entries using an installer abstraction.
+
+---
+
+### :core:network
+
+Encapsulates network-related infrastructure.
+
+**Typical content:**
+- HTTP client setup
+- API service definitions
+- Network interceptors
+- Serialization configuration
+
+By isolating networking concerns, the rest of the app remains independent of specific implementations.
+
+---
+
+### :core:database
+
+Local persistence infrastructure.
+
+**Typical content:**
+- Room database setup
+- DAOs
+- Database entities
+- Migrations
+
 This module exposes database access through clean APIs and does not depend on UI or feature modules.
 
-## :core:notification
-This module encapsulates notification-related logic.
+---
 
-Typical content:
-Notification channel definitions
-Notification builders
-Scheduling helpers for reminders
-Abstractions for local notifications
-By isolating this logic, features can trigger notifications without dealing with low-level Android APIs.
+### :core:notification
 
-📦 Data module
-## :data
-The data module is responsible for providing application data from various sources.
+Notification-related infrastructure.
 
-It contains:
-Repository implementations
-Integration with :core:network
-Integration with :core:database
-Data transfer objects (DTOs)
-Mappers between network, database, and domain models
-This module focuses on data access and persistence and does not contain UI or presentation logic.
+**Typical content:**
+- Notification channel definitions
+- Notification builders
+- Scheduling helpers for reminders
+- Abstractions for local notifications
+
+Features can trigger notifications without dealing with low-level Android APIs.
+
+---
+
+### :core:data
+
+Responsible for data access and coordination.
+
+**Typical content:**
+- Repository interfaces and implementations
+- Integration with `:core:network`
+- Integration with `:core:database`
+- Data mappers
+
+---
 
 ## 🧩 Feature modules
-:feature:*
-Each feature module represents a vertical slice of functionality.
 
-Typical content:
-ViewModels
-Compose screens
-Feature-specific domain logic
-Navigation entries related to the feature
-Feature modules depend only on:
-Core modules
-Navigation module
-Required abstractions from the data layer
-By keeping features isolated, the project remains scalable and easier to reason about as new functionality is added.
+### :feature:<feature-name>
 
-📱 App module
-:app
-The app module is the entry point of the application.
+Each feature is a **self-contained vertical slice** and is split into submodules.
 
-It contains:
-Application and activity setup
-App-level navigation composition
-Dependency injection setup
-Startup and initialization logic
+---
+
+### :feature:<feature-name>:api
+
+Public contract of the feature.
+
+**Contains:**
+- `NavKey` definitions
+- Extensions on `Navigator` encapsulating feature navigation
+- Public models or callbacks (if needed)
+
+This ensures navigation logic does not leak across modules.
+
+---
+
+### :feature:<feature-name>:impl
+
+Feature implementation.
+
+**Contains:**
+- ViewModels
+- Compose screens
+- Feature-specific logic
+- Navigation entry contributions
+
+**Each feature:**
+- Owns its destinations
+- Defines how it is navigated to
+- Remains independent from other features
+
+---
+
+## 📱 App module
+
+### :app
+
+The entry point of the application.
+
+**Responsibilities:**
+- Application and activity setup
+- App-level navigation composition
+- Dependency injection setup
+- Startup and initialization logic
+
 Most high-level configuration happens here, while actual functionality lives in core, data, and feature modules.

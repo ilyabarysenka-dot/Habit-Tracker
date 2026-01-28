@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.navigation"
+    namespace = "com.example.habittracker.core.navigation"
 }
 
 dependencies {
